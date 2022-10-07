@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace BlenderImporter
+namespace BlenderImporterOld
 {
     [CreateAssetMenu(fileName = "BlenderGlobalImportSettings",
         menuName = "BlenderImporter/BlenderGlobalImportSettings")]

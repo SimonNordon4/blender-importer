@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BlenderImporter
+namespace BlenderImporterOld
 {
     /// <summary>
     /// Utility Class for Blender Importer.

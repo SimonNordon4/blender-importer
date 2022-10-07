@@ -7,7 +7,10 @@ namespace BlenderImporter
     {
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            // We want the UI to have some kind of "Apply" on import.
+            // TODO: Start a Blender Process
+            // TODO: Export everything in the Blender File.
+            // TODO: Mark when it's completed.
+            // To begin with, let's just export the file by opening a blender process.
             throw new System.NotImplementedException();
         }
     }

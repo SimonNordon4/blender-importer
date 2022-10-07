@@ -2,7 +2,7 @@ using System.IO;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace BlenderImporter
+namespace BlenderImporterOld
 {
     public static class BlenderProcessHandler
     {

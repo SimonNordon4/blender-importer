@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1512545446, guid: 39cad5adf1290654d9596fa0cba1c227, type: 3}
+  m_Name: BlenderImporterOverrideSettings
+  m_EditorClassIdentifier: 
+  ExportVisible: 0
+  ExportObjects: 63
+  ExportCollections: 1
+  CollectionFilterMode: 1
+  CollectionNames: []
+  TriangulateMesh: 0
+  ApplyModifiers: 1
+  EmbedTextures: 1
+  BakeAnimation: 1
+  BakeAnimationNLAStrips: 1
+  BakeAnimationActions: 1
+  SimplifyBakeAnimation: 1

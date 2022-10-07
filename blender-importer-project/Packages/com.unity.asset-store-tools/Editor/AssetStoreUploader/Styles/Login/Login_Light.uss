@@ -1,25 +1,20 @@
-﻿.asset-store-logo
-{
+﻿.asset-store-logo {
     background-image: url("../../Icons/publisher_portal_black.png");
 }
 
-.or-label
-{
+.or-label {
     color: rgb(28, 28, 28);
 }
 
-.login-error-box
-{
+.login-error-box {
     background-color: rgb(212, 212, 212);
 }
 
-.manual-login-box
-{
+.manual-login-box {
     background-color: rgb(212, 212, 212);
 }
 
-.hyperlink-button
-{
+.hyperlink-button {
     color: rgb(68, 113, 229);
 
     border-color: rgba(0, 0, 0, 0);
@@ -27,17 +22,14 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.hyperlink-button:hover
-{
+.hyperlink-button:hover {
     color: rgb(68, 133, 229);
 }
 
-.hyperlink-button:active
-{
+.hyperlink-button:active {
     color: rgb(68, 93, 229);
 }
 
-.login-error-box > Image
-{
+.login-error-box > Image {
     --unity-image: resource("console.erroricon@2x");
 }

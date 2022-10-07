@@ -6,13 +6,15 @@ using System.IO;
 
 namespace BlenderImporter
 {
-    [ScriptedImporter(1, new[] { "made_by_simon" }, new[] { "blend" })]
+    [ScriptedImporter(1, new[] { "made_by_simon" }, new[] { "blend-old" })]
     public class BlendImporter : ScriptedImporter
     {
-        [Tooltip("This will create empty gameobjects for collections, and parent all blender objects in that collection to them.")]
+        [Tooltip(
+            "This will create empty gameobjects for collections, and parent all blender objects in that collection to them.")]
         public bool ImportCollectionAsGameObjects = true;
 
-        [Tooltip("Attempt to convert blender materials into unity materials. Currently only works for BDSF & Emission Shaders.")]
+        [Tooltip(
+            "Attempt to convert blender materials into unity materials. Currently only works for BDSF & Emission Shaders.")]
         public bool ImportMaterialsAndTextures = true;
 
         [Tooltip("Will attempt to evalute Blender Shader node into a texture that can be used in Unity.")]
@@ -31,7 +33,8 @@ namespace BlenderImporter
             BlenderProcessHandler.OnBlenderProcessFinished onBlenderProcessFinished = BlendProcessFinished;
 
             // Run Blender Process
-            BlenderProcessHandler.RunBlender(blenderExectuablePath, pythonExectuablePath, blendFilePath, args, onBlenderProcessFinished);
+            BlenderProcessHandler.RunBlender(blenderExectuablePath, pythonExectuablePath, blendFilePath, args,
+                onBlenderProcessFinished);
         }
 
         /// <summary>
@@ -41,12 +44,12 @@ namespace BlenderImporter
         /// <returns>a string in the form of a dictionary of arguments.</returns>
         private string ResolvePythonArgs(string assetPath)
         {
-            string args = string.Empty;
-            string blend_path = GetBlendPath(assetPath);
-            string blend_name = GetBlendName(assetPath);
-            bool import_collections = ImportCollectionAsGameObjects;
-            bool import_materials = ImportMaterialsAndTextures;
-            bool bake_shaders = BakeShaderNodeToTexture;
+            var args = string.Empty;
+            var blend_path = GetBlendPath(assetPath);
+            var blend_name = GetBlendName(assetPath);
+            var import_collections = ImportCollectionAsGameObjects;
+            var import_materials = ImportMaterialsAndTextures;
+            var bake_shaders = BakeShaderNodeToTexture;
             args += $" {nameof(blend_path)}={blend_path}";
             args += $" {nameof(blend_name)}={blend_name}";
             args += $" {nameof(import_collections)}={import_collections}";

@@ -7,7 +7,9 @@ namespace BlenderImporter
     public static class BlenderProcessHandler
     {
         public delegate void OnBlenderProcessFinished(string blendFilePath, bool success);
-        public static void RunBlender(string blenderExecutablePath, string pythonExectuablePath, string blendFilePath, string args, OnBlenderProcessFinished callback)
+
+        public static void RunBlender(string blenderExecutablePath, string pythonExectuablePath, string blendFilePath,
+            string args, OnBlenderProcessFinished callback)
         {
             // set initial process arguments.
             var start = new ProcessStartInfo();
@@ -20,24 +22,21 @@ namespace BlenderImporter
             start.CreateNoWindow = true;
 
             // begin the blender process.
-            Process process = new Process();
+            var process = new Process();
             process.StartInfo = start;
             process.EnableRaisingEvents = true;
 
             // We debug.log everytime a print line is registered in the blender process.
             process.OutputDataReceived += (sender, args) =>
             {
-                if(args != null)
-                   { f.print(args.Data,BlenderImporterGlobalSettings.instance.PythonConsoleTextColor,"\tpy",BlenderImporterGlobalSettings.instance.PythonConsoleLabelColor);}
+                if (args != null)
+                    f.print(args.Data, BlenderImporterGlobalSettings.instance.PythonConsoleTextColor, "\tpy",
+                        BlenderImporterGlobalSettings.instance.PythonConsoleLabelColor);
             };
 
             process.ErrorDataReceived += (sender, args) =>
             {
-                if(args != null)
-                {
-                    f.printError(args.Data,"\tpy");
-                }
-                    
+                if (args != null) f.printError(args.Data, "\tpy");
             };
             process.Start();
             process.BeginOutputReadLine();
@@ -55,12 +54,14 @@ namespace BlenderImporter
     public static class BlenderProcessHandler1
     {
         public delegate void OnBlenderProcessFinished1(string blendFilePath, bool success);
-        public static void RunBlender(string blenderExecutablePath, string pythonExectuablePath, string blendFilePath, string args, OnBlenderProcessFinished1 callback)
+
+        public static void RunBlender(string blenderExecutablePath, string pythonExectuablePath, string blendFilePath,
+            string args, OnBlenderProcessFinished1 callback)
         {
             // This is the command line argument for everything that comes after ../blender.exe
             var command = $"--background {blendFilePath} --python {pythonExectuablePath} -- {args}";
 
-            return; 
+            return;
         }
     }
 }

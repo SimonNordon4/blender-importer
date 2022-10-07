@@ -1,5 +1,4 @@
-﻿.bottom-tools-row
-{
+﻿.bottom-tools-row {
     border-top-width: 1px;
     border-color: rgb(33, 33, 33);
 

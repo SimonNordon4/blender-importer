@@ -27,14 +27,17 @@ namespace BlenderImporter
             // We debug.log everytime a print line is registered in the blender process.
             process.OutputDataReceived += (sender, args) =>
             {
-                if(args is not null)
-                    f.print(args.Data,BlenderImporterGlobalSettings.instance.PythonConsoleTextColor,"\tpy",BlenderImporterGlobalSettings.instance.PythonConsoleLabelColor);
+                if(args != null)
+                   { f.print(args.Data,BlenderImporterGlobalSettings.instance.PythonConsoleTextColor,"\tpy",BlenderImporterGlobalSettings.instance.PythonConsoleLabelColor);}
             };
 
             process.ErrorDataReceived += (sender, args) =>
             {
-                if(args is not null)
+                if(args != null)
+                {
                     f.printError(args.Data,"\tpy");
+                }
+                    
             };
             process.Start();
             process.BeginOutputReadLine();

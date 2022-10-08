@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 namespace BlenderImporter
 {
@@ -13,8 +14,9 @@ namespace BlenderImporter
             var path = assetPath;
             if (!path.Contains(".blend")) return;
 
+            Debug.Log("Overriding importer for " + path);
             var currentOverride = AssetDatabase.GetImporterOverride(path);
-            if (currentOverride == null) AssetDatabase.SetImporterOverride<BlenderScriptedImporter>(path);
+            if (currentOverride == null) AssetDatabase.SetImporterOverride<BlendScriptedImporter>(path);
         }
     }
 }

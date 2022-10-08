@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BlenderImporterOld
 {
-    [ScriptedImporter(1, new[] { "made_by_simon" }, new[] { "blend-old" })]
+    [ScriptedImporter(1, new[] { "-old" }, new[] { "blend-old" })]
     public class BlendImporter : ScriptedImporter
     {
         [Tooltip(

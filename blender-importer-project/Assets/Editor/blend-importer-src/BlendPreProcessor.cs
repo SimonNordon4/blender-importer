@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace BlenderImporter
@@ -16,7 +17,9 @@ namespace BlenderImporter
 
             Debug.Log("Overriding importer for " + path);
             var currentOverride = AssetDatabase.GetImporterOverride(path);
-            if (currentOverride == null) AssetDatabase.SetImporterOverride<BlendScriptedImporter>(path);
+            Debug.Log("Current override: " + currentOverride);
+            if (currentOverride != typeof(BlendScriptedImporter)) AssetDatabase.SetImporterOverride<BlendScriptedImporter>(path);
+
         }
     }
 }

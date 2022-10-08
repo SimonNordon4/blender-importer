@@ -25,9 +25,10 @@ namespace BlenderImporter
             var args = "";
             
             // get blender association.
-            
+            var x = BlendDefaultApplicationFinder.GetExecFileAssociatedToExtension(".blend" );
+            Debug.Log(x);
             // BlenderProcessHandler.RunBlender(pythonScript, blendFilePath, args, onBlenderProcessFinished);
-            
+
             // BlenderProcessHandler.RunBlender(blendFilePath);
         }
 

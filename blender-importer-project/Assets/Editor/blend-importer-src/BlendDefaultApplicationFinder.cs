@@ -1,90 +1,111 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace BlenderImporter
 {
-    [Flags]
-    public enum AssocF
+    /// <summary>
+    /// Usage:  string executablePath = FileAssociation.GetExecFileAssociatedToExtension(pathExtension, "open");
+    /// </summary>
+    public static class BlendDefaultApplicationFinder
     {
-        None = 0,
-        Init_NoRemapCLSID = 0x1,
-        Init_ByExeName = 0x2,
-        Open_ByExeName = 0x2,
-        Init_DefaultToStar = 0x4,
-        Init_DefaultToFolder = 0x8,
-        NoUserSettings = 0x10,
-        NoTruncate = 0x20,
-        Verify = 0x40,
-        RemapRunDll = 0x80,
-        NoFixUps = 0x100,
-        IgnoreBaseClass = 0x200,
-        Init_IgnoreUnknown = 0x400,
-        Init_Fixed_ProgId = 0x800,
-        Is_Protocol = 0x1000,
-        Init_For_File = 0x2000
-    }
-
-    public enum AssocStr
-    {
-        Command = 1,
-        Executable,
-        FriendlyDocName,
-        FriendlyAppName,
-        NoOpen,
-        ShellNewValue,
-        DDECommand,
-        DDEIfExec,
-        DDEApplication,
-        DDETopic,
-        InfoTip,
-        QuickTip,
-        TileInfo,
-        ContentType,
-        DefaultIcon,
-        ShellExtension,
-        DropTarget,
-        DelegateExecute,
-        Supported_Uri_Protocols,
-        ProgID,
-        AppID,
-        AppPublisher,
-        AppIconReference,
-        Max
-    }
-    
-    public class BlendDefaultApplicationFinder
-    {
-        [DllImport("Shlwapi.dll", CharSet = CharSet.Unicode)]
-        public static extern uint AssocQueryString
-        (
-            uint flags, 
-            uint str, 
-            string pszAssoc, 
-            string pszExtra, 
-            [Out] StringBuilder pszOut, 
-            [In][Out] ref uint pcchOut);
-
-        public static string AssocQueryString(AssocStr association, string extension)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <param name="verb"></param>
+        /// <returns>Return null if not found</returns>
+        public static string GetExecFileAssociatedToExtension(string ext, string verb = null)
         {
-            const int S_OK = 0;
-            const int S_FALSE = 1;
-
-            uint length = 0;
-            uint ret = AssocQueryString((uint)AssocF.None, (uint)association, extension, null, null, ref length);
-            if (ret != S_FALSE)
+            if (ext[0] != '.')
             {
-                throw new InvalidOperationException("Could not determine associated string");
+                ext = "." + ext;
             }
 
-            var sb = new StringBuilder((int)length); // (length-1) will probably work too as the marshaller adds null termination
-            ret = AssocQueryString((uint)AssocF.None, (uint)association, extension, null, sb, ref length);
-            if (ret != S_OK)
+            string executablePath = FileExtentionInfo(AssocStr.Executable, ext, verb); // Will only work for 'open' verb
+            if (string.IsNullOrEmpty(executablePath))
             {
-                throw new InvalidOperationException("Could not determine associated string"); 
+                executablePath = FileExtentionInfo(AssocStr.Command, ext, verb); // required to find command of any other verb than 'open'
+
+                // Extract only the path
+                if (!string.IsNullOrEmpty(executablePath) && executablePath.Length > 1) 
+                {
+                    if (executablePath[0] == '"')
+                    {
+                        executablePath = executablePath.Split('\"')[1];
+                    }
+                    else if (executablePath[0] == '\'')
+                    {
+                        executablePath = executablePath.Split('\'')[1];
+                    }
+                }
             }
 
-            return sb.ToString();
+            // Ensure to not return the default OpenWith.exe associated executable in Windows 8 or higher
+            if (!string.IsNullOrEmpty(executablePath) && File.Exists(executablePath) &&
+                !executablePath.ToLower().EndsWith(".dll"))
+            {
+                if (executablePath.ToLower().EndsWith("openwith.exe"))
+                {
+                    return null; // 'OpenWith.exe' is th windows 8 or higher default for unknown extensions. I don't want to have it as associted file
+                }
+                return executablePath;
+            }
+            return executablePath;
         }
+
+        [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        static extern uint AssocQueryString(AssocF flags, AssocStr str, string pszAssoc, string pszExtra, [Out] StringBuilder pszOut, [In][Out] ref uint pcchOut);
+
+        private static string FileExtentionInfo(AssocStr assocStr, string doctype, string verb)
+        {
+            uint pcchOut = 0;
+            AssocQueryString(AssocF.Verify, assocStr, doctype, verb, null, ref pcchOut);
+
+            Debug.Assert(pcchOut != 0);
+            if (pcchOut == 0)
+            {
+                return "";
+            }
+
+            StringBuilder pszOut = new StringBuilder((int)pcchOut);
+            AssocQueryString(AssocF.Verify, assocStr, doctype, verb, pszOut, ref pcchOut);
+            return pszOut.ToString();
+        }
+
+        [Flags]
+        public enum AssocF
+        {
+            Init_NoRemapCLSID = 0x1,
+            Init_ByExeName = 0x2,
+            Open_ByExeName = 0x2,
+            Init_DefaultToStar = 0x4,
+            Init_DefaultToFolder = 0x8,
+            NoUserSettings = 0x10,
+            NoTruncate = 0x20,
+            Verify = 0x40,
+            RemapRunDll = 0x80,
+            NoFixUps = 0x100,
+            IgnoreBaseClass = 0x200
+        }
+
+        public enum AssocStr
+        {
+            Command = 1,
+            Executable,
+            FriendlyDocName,
+            FriendlyAppName,
+            NoOpen,
+            ShellNewValue,
+            DDECommand,
+            DDEIfExec,
+            DDEApplication,
+            DDETopic
+        }
+
+
+
     }
 }

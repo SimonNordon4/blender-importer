@@ -9,4 +9,37 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: d3a4d5aedb8a49ab9bdda8edd61183f3, type: 3}
-  ImportExtracted: 1
+  advancedImportMode: 0
+  modelImporterSettings:
+    globalScale: 1.5
+    convertUnits: 1
+    bakeAxisConversion: 0
+    importBlendShapes: 1
+    importVisibility: 1
+    importCameras: 1
+    importLights: 1
+    preserveHierarchy: 0
+    sortHierarchyByName: 1
+    meshCompression: 0
+    isReadable: 0
+    optimizeMesh: -1
+    generateColliders: 0
+    keepQuads: 0
+    weldVertices: 1
+    indexFormat: 0
+    legacyBlendShapeNormals: 0
+    normals: 0
+    blendShapeNormals: 1
+    normalsMode: 4
+    smoothingAngle: 60
+    tangents: 3
+    swapUvs: 0
+    generateLightmapUvs: 0
+    importConstraints: 0
+    importAnimation: 1
+    resampleCurves: 1
+    animationCompression: 2
+    rotationError: 0.5
+    positionError: 0.5
+    scaleError: 0.5
+    animatedCustomProperties: 0

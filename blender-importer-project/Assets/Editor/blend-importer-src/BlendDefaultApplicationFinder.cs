@@ -11,12 +11,6 @@ namespace BlenderImporter
     /// </summary>
     public static class BlendDefaultApplicationFinder
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ext"></param>
-        /// <param name="verb"></param>
-        /// <returns>Return null if not found</returns>
         public static string GetExecFileAssociatedToExtension(string ext, string verb = null)
         {
             if (ext[0] != '.')

@@ -19,7 +19,6 @@ namespace BlenderImporter
             var currentOverride = AssetDatabase.GetImporterOverride(path);
             Debug.Log("Current override: " + currentOverride);
             if (currentOverride != typeof(BlendImporter)) AssetDatabase.SetImporterOverride<BlendImporter>(path);
-
         }
     }
 }

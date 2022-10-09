@@ -17,7 +17,10 @@ namespace BlenderImporter
         [Tooltip("Advanced Import Mode: Allows you to export multiple assets from the same blender file.")]
         public bool advancedImportMode;
 
-        public ModelImporterSettings modelImporterSettings;
+        /// <summary>
+        /// Model Importer Settings
+        /// </summary>
+        public ModelImporterSettings ms;
 
         private AssetImportContext _ctx;
 

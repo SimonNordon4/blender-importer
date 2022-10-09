@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 19e57cfd59123ad4c8b0a08be879d951
-importerOverride: Assembly-CSharp-Editor:BlenderImporter:BlendScriptedImporter
+importerOverride: Assembly-CSharp-Editor:BlenderImporter:BlendImporter
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,4 +8,5 @@ ScriptedImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {instanceID: 0}
+  script: {fileID: 11500000, guid: d3a4d5aedb8a49ab9bdda8edd61183f3, type: 3}
+  ImportExtracted: 1

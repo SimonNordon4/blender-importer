@@ -7,9 +7,10 @@ blend_path = bpy.path.abspath("//")
 
 # get the directory of the current file
 blend_dir = os.path.dirname(blend_path)
+blend_name = os.path.basename(bpy.data.filepath)
 
 # export the contents of the file as an FBX in the same directory.
-bpy.ops.export_scene.fbx(filepath=blend_dir + "/export.fbx",
+bpy.ops.export_scene.fbx(filepath=blend_dir + "\\" + blend_name + ".fbx",
                          check_existing=False,
                          use_selection=False,
                          use_active_collection=False,

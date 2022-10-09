@@ -7,28 +7,17 @@ namespace BlenderImporter
     {
         public delegate void OnBlenderProcessFinished(string blendFilePath, bool success);
 
-
-        public static void RunBlender(string blendFile)
-        {
-            // Start a new process to open the blendFile
-            Process blenderProcess = new Process();
-            blenderProcess.StartInfo.FileName = "blender";
-            blenderProcess.StartInfo.Arguments = blendFile;
-            blenderProcess.StartInfo.UseShellExecute = false;
-            blenderProcess.StartInfo.RedirectStandardOutput = true;
-            blenderProcess.StartInfo.RedirectStandardError = true;
-            blenderProcess.StartInfo.CreateNoWindow = true;
-            blenderProcess.EnableRaisingEvents = true;
-        }
         
-        public static void RunBlender1(string pythonScriptPath,
+        
+        public static void RunBlender(string blenderExecutable,
+            string pythonScriptPath,
             string blendFilePath,
             string args, OnBlenderProcessFinished callback)
         {
             // set initial process arguments.
             var start = new ProcessStartInfo
             {
-                FileName = blendFilePath,
+                FileName = blenderExecutable,
                 // This is the command line argument for everything that comes after ../blender.exe
                 Arguments = $"--background {blendFilePath} --python {pythonScriptPath} -- {args}",
                 UseShellExecute = false,

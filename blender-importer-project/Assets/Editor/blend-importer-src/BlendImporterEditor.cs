@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace BlenderImporter
 {
@@ -42,6 +43,14 @@ namespace BlenderImporter
         private SerializedProperty _tangents;
         private SerializedProperty _swapUvs;
         private SerializedProperty _generateLightmapUvs;
+        // Geometry Lightmaps
+        private SerializedProperty _secondaryUVHardAngle;
+        private SerializedProperty _secondaryUVAngleDistortion;
+        private SerializedProperty _secondaryUVAreaDistortion;
+        private SerializedProperty _secondaryUVMarginMethod;
+        private SerializedProperty _secondaryUVMinLightmapResolution;
+        private SerializedProperty _secondaryUVMinObjectScale;
+        
         #endregion
         
         #region Animation Tab Properties
@@ -54,7 +63,7 @@ namespace BlenderImporter
         private SerializedProperty _scaleError;
         private SerializedProperty _animatedCustomProperties;
         private SerializedProperty _clipAnimations;
-
+        private SerializedProperty _lightMapSettings;
 
         #endregion
    
@@ -95,6 +104,14 @@ namespace BlenderImporter
             _tangents = serializedObject.FindProperty("modelImporterSettings.importTangents");
             _swapUvs = serializedObject.FindProperty("modelImporterSettings.swapUVChannels");
             _generateLightmapUvs = serializedObject.FindProperty("modelImporterSettings.generateSecondaryUV");
+            // Geometry Lightmaps
+            _secondaryUVHardAngle = serializedObject.FindProperty("modelImporterSettings.secondaryUVHardAngle");
+            _secondaryUVAngleDistortion = serializedObject.FindProperty("modelImporterSettings.secondaryUVAngleDistortion");
+            _secondaryUVAreaDistortion = serializedObject.FindProperty("modelImporterSettings.secondaryUVAreaDistortion");
+            _secondaryUVMarginMethod = serializedObject.FindProperty("modelImporterSettings.secondaryUVMarginMethod");
+            _secondaryUVMinLightmapResolution = serializedObject.FindProperty("modelImporterSettings.secondaryUVMinLightmapResolution");
+            _secondaryUVMinObjectScale = serializedObject.FindProperty("modelImporterSettings.secondaryUVMinObjectScale");
+            
             
             #endregion
         }
@@ -111,7 +128,7 @@ namespace BlenderImporter
             // Call ApplyRevertGUI to show Apply and Revert buttons.
             ApplyRevertGUI();
         }
-        
+
         private void DrawModelTab()
         {
             // Update the serializedObject in case it has been changed outside the Inspector.
@@ -145,8 +162,14 @@ namespace BlenderImporter
             EditorGUILayout.PropertyField(_tangents);
             EditorGUILayout.PropertyField(_swapUvs);
             EditorGUILayout.PropertyField(_generateLightmapUvs);
-            
+            // Geometry - Lightmaps
 
+            EditorGUILayout.PropertyField(_secondaryUVHardAngle);
+            EditorGUILayout.PropertyField(_secondaryUVAngleDistortion);
+            EditorGUILayout.PropertyField(_secondaryUVAreaDistortion);
+            EditorGUILayout.PropertyField(_secondaryUVMarginMethod);
+            EditorGUILayout.PropertyField(_secondaryUVMinLightmapResolution);
+            EditorGUILayout.PropertyField(_secondaryUVMinObjectScale);
             // Apply the changes so Undo/Redo is working
             serializedObject.ApplyModifiedProperties();
         }

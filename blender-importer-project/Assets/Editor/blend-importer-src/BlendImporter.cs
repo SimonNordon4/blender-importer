@@ -115,7 +115,15 @@ namespace BlenderImporter
         public bool swapUVChannels = false;
         public bool generateSecondaryUV = false;
 
-        public LightMapSettings lightMapSettings;
+        // Geometry Lightmap Settings
+        
+        public float secondaryUVHardAngle = 88.0f;
+        public float secondaryUVAngleDistortion = 8.0f;
+        public float secondaryUVAreaDistortion = 15.0f;
+        public ModelImporterSecondaryUVMarginMethod secondaryUVMarginMethod =
+            ModelImporterSecondaryUVMarginMethod.Calculate;
+        public int secondaryUVMinLightmapResolution = 40;
+        public float secondaryUVMinObjectScale = 1.0f;
 
         // Rigs not supported.
 
@@ -138,13 +146,7 @@ namespace BlenderImporter
     [Serializable]
     public class LightMapSettings
     {
-        public float secondaryUVHardAngle = 88.0f;
-        public float secondaryUVAngleDistortion = 8.0f;
-        public float secondaryUVAreaDistortion = 15.0f;
-        public ModelImporterSecondaryUVMarginMethod secondaryUVMarginMethod =
-            ModelImporterSecondaryUVMarginMethod.Calculate;
-        public int secondaryUVMinLightmapResolution = 40;
-        public float secondaryUVMinObjectScale = 1.0f;
+        
     }
 
 }

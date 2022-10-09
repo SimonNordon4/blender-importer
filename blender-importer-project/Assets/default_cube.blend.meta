@@ -10,9 +10,9 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: d3a4d5aedb8a49ab9bdda8edd61183f3, type: 3}
   advancedImportMode: 0
-  modelImporterSettings:
-    globalScale: 1.5
-    convertUnits: 1
+  ms:
+    globalScale: 1
+    useFileUnits: 1
     bakeAxisConversion: 0
     importBlendShapes: 1
     importVisibility: 1
@@ -22,24 +22,31 @@ ScriptedImporter:
     sortHierarchyByName: 1
     meshCompression: 0
     isReadable: 0
-    optimizeMesh: -1
-    generateColliders: 0
+    meshOptimizationFlags: -1
+    addCollider: 0
     keepQuads: 0
     weldVertices: 1
     indexFormat: 0
     legacyBlendShapeNormals: 0
-    normals: 0
-    blendShapeNormals: 1
-    normalsMode: 4
-    smoothingAngle: 60
-    tangents: 3
-    swapUvs: 0
-    generateLightmapUvs: 0
+    importerNormals: 0
+    importBlendShapeNormals: 1
+    normalCalculationMode: 4
+    normalSmoothingSource: 0
+    normalSmoothingAngle: 60
+    importTangents: 3
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    secondaryUVHardAngle: 48.4
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     importConstraints: 0
     importAnimation: 1
     resampleCurves: 1
     animationCompression: 2
-    rotationError: 0.5
-    positionError: 0.5
-    scaleError: 0.5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animatedCustomProperties: 0

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Principal;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEditor.PackageManager.UI;
@@ -113,6 +114,7 @@ namespace BlenderImporter
         public ModelImporterNormalSmoothingSource normalSmoothingSource =
             ModelImporterNormalSmoothingSource.PreferSmoothingGroups;
 
+        [UnityEngine.Range(0,180)]
         public int normalSmoothingAngle = 60;
         public ModelImporterTangents importTangents = ModelImporterTangents.CalculateMikk;
         public bool swapUVChannels = false;
@@ -120,8 +122,11 @@ namespace BlenderImporter
 
         // Geometry Lightmap Settings
         
+        [UnityEngine.Range(0,180)]
         public float secondaryUVHardAngle = 88.0f;
+        [UnityEngine.Range(1,75)]
         public float secondaryUVAngleDistortion = 8.0f;
+        [UnityEngine.Range(1,75)]
         public float secondaryUVAreaDistortion = 15.0f;
         public ModelImporterSecondaryUVMarginMethod secondaryUVMarginMethod =
             ModelImporterSecondaryUVMarginMethod.Calculate;
@@ -138,18 +143,12 @@ namespace BlenderImporter
         public ModelImporterAnimationCompression animationCompression =
             ModelImporterAnimationCompression.KeyframeReductionAndCompression;
 
-        public float rotationError = 0.5f;
-        public float positionError = 0.5f;
-        public float scaleError = 0.5f;
-        public bool animatedCustomProperties = false;
-        public ModelImporterClipAnimation clipAnimations;
-
-    }
-
-    [Serializable]
-    public class LightMapSettings
-    {
+        public float animationRotationError = 0.5f;
+        public float animationPositionError = 0.5f;
+        public float animationScaleError = 0.5f;
+        public bool importAnimatedCustomProperties = false;
         
+        // TODO: Add animation clips
+        // public string[] referencedClips = Array.Empty<string>();
     }
-
 }

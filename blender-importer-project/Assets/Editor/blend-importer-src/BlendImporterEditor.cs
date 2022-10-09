@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.AssetImporters;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -44,6 +44,8 @@ namespace BlenderImporter
         private SerializedProperty _swapUvs;
         private SerializedProperty _generateLightmapUvs;
         // Geometry Lightmaps
+        private bool _isLightmapExpanded = false;
+        
         private SerializedProperty _secondaryUVHardAngle;
         private SerializedProperty _secondaryUVAngleDistortion;
         private SerializedProperty _secondaryUVAreaDistortion;
@@ -66,7 +68,32 @@ namespace BlenderImporter
         private SerializedProperty _lightMapSettings;
 
         #endregion
-   
+
+        public override VisualElement CreateInspectorGUI()
+        {
+            serializedObject.Update();
+            var root = new VisualElement();
+            root.Add(new IMGUIContainer(() =>
+            {
+                _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings, _toolBarOptions);
+                switch (_toolbarInt)
+                {
+                    case 0:
+                        //DrawBlenderTab();
+                        break;
+                    case 1:
+                        DrawModelTab();
+                        break;
+                    case 2:
+                        DrawAnimationTab();
+                        break;
+                    case 3:
+                        //DrawMaterialsTab();
+                        break;
+                }
+            }));
+            return root;
+        }
         public override void OnEnable()
         {
             base.OnEnable();
@@ -135,41 +162,54 @@ namespace BlenderImporter
             serializedObject.Update();
 
             // Scene.
-            EditorGUILayout.PropertyField(_scaleFactor);
-            EditorGUILayout.PropertyField(_convertUnits);
-            EditorGUILayout.PropertyField(_bakeAxisConversion);
-            EditorGUILayout.PropertyField(_importBlendShapes);
-            EditorGUILayout.PropertyField(_importVisibility);
-            EditorGUILayout.PropertyField(_importCameras);
-            EditorGUILayout.PropertyField(_importLights);
-            EditorGUILayout.PropertyField(_preserveHierarchy);
-            EditorGUILayout.PropertyField(_sortHierarchyByName);
-            // Meshes
-            EditorGUILayout.PropertyField(_meshCompression);
-            EditorGUILayout.PropertyField(_isReadable);
-            EditorGUILayout.PropertyField(_optimizeMesh);
-            EditorGUILayout.PropertyField(_generateColliders);
-            // Geometry
-            EditorGUILayout.PropertyField(_keepQuads);
-            EditorGUILayout.PropertyField(_weldVertices);
-            EditorGUILayout.PropertyField(_indexFormat);
-            EditorGUILayout.PropertyField(_legacyBlendShapeNormals);
-            EditorGUILayout.PropertyField(_normals);
-            EditorGUILayout.PropertyField(_blendShapeNormals);
-            EditorGUILayout.PropertyField(_normalsMode);
-            EditorGUILayout.PropertyField(_normalSmoothingSource);
-            EditorGUILayout.PropertyField(_smoothingAngle);
-            EditorGUILayout.PropertyField(_tangents);
-            EditorGUILayout.PropertyField(_swapUvs);
-            EditorGUILayout.PropertyField(_generateLightmapUvs);
+            var root = new VisualElement();
+            root.Add(new PropertyField(_scaleFactor));
+            // EditorGUILayout.PropertyField(_scaleFactor);
+            // EditorGUILayout.PropertyField(_convertUnits);
+            // EditorGUILayout.PropertyField(_bakeAxisConversion);
+            // EditorGUILayout.PropertyField(_importBlendShapes);
+            // EditorGUILayout.PropertyField(_importVisibility);
+            // EditorGUILayout.PropertyField(_importCameras);
+            // EditorGUILayout.PropertyField(_importLights);
+            // EditorGUILayout.PropertyField(_preserveHierarchy);
+            // EditorGUILayout.PropertyField(_sortHierarchyByName);
+            // // Meshes
+            // EditorGUILayout.PropertyField(_meshCompression);
+            // EditorGUILayout.PropertyField(_isReadable);
+            // EditorGUILayout.PropertyField(_optimizeMesh);
+            // EditorGUILayout.PropertyField(_generateColliders);
+            // // Geometry
+            // EditorGUILayout.PropertyField(_keepQuads);
+            // EditorGUILayout.PropertyField(_weldVertices);
+            // EditorGUILayout.PropertyField(_indexFormat);
+            // EditorGUILayout.PropertyField(_legacyBlendShapeNormals);
+            // EditorGUILayout.PropertyField(_normals);
+            // EditorGUILayout.PropertyField(_blendShapeNormals);
+            // EditorGUILayout.PropertyField(_normalsMode);
+            // EditorGUILayout.PropertyField(_normalSmoothingSource);
+            // EditorGUILayout.PropertyField(_smoothingAngle);
+            // EditorGUILayout.PropertyField(_tangents);
+            // EditorGUILayout.PropertyField(_swapUvs);
+            // EditorGUILayout.PropertyField(_generateLightmapUvs);
             // Geometry - Lightmaps
 
-            EditorGUILayout.PropertyField(_secondaryUVHardAngle);
-            EditorGUILayout.PropertyField(_secondaryUVAngleDistortion);
-            EditorGUILayout.PropertyField(_secondaryUVAreaDistortion);
-            EditorGUILayout.PropertyField(_secondaryUVMarginMethod);
-            EditorGUILayout.PropertyField(_secondaryUVMinLightmapResolution);
-            EditorGUILayout.PropertyField(_secondaryUVMinObjectScale);
+            // create a foldout for the lightmap settings
+
+            // _isLightmapExpanded = EditorGUILayout.Foldout(_isLightmapExpanded, "Lightmap Settings");
+            //
+            // if (_isLightmapExpanded)
+            // {
+            //     EditorGUI.indentLevel++;
+            //     EditorGUILayout.PropertyField(_secondaryUVHardAngle);
+            //     EditorGUILayout.PropertyField(_secondaryUVAngleDistortion);
+            //     EditorGUILayout.PropertyField(_secondaryUVAreaDistortion);
+            //     EditorGUILayout.PropertyField(_secondaryUVMarginMethod);
+            //     EditorGUILayout.PropertyField(_secondaryUVMinLightmapResolution);
+            //     EditorGUILayout.PropertyField(_secondaryUVMinObjectScale);
+            //     EditorGUI.indentLevel--;
+            // }
+            
+
             // Apply the changes so Undo/Redo is working
             serializedObject.ApplyModifiedProperties();
         }

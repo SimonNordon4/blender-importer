@@ -43,7 +43,7 @@ ScriptedImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     importConstraints: 1
-    importAnimation: 0
+    importAnimation: 1
     resampleCurves: 1
     animationCompression: 2
     animationRotationError: 0.5

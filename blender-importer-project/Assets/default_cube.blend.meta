@@ -42,11 +42,11 @@ ScriptedImporter:
     secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
-    importConstraints: 0
-    importAnimation: 1
+    importConstraints: 1
+    importAnimation: 0
     resampleCurves: 1
     animationCompression: 2
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animatedCustomProperties: 0
+    importAnimatedCustomProperties: 0

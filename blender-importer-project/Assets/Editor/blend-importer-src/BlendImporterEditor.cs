@@ -13,7 +13,7 @@ namespace BlenderImporter
         // Tool Bar
         private int _toolbarInt = 1;
         private readonly string[] _toolbarStrings = {"Blender", "Model", "Animation", "Materials"};
-        private readonly GUILayoutOption[] _toolBarOptions = { GUILayout.MaxWidth(350), GUILayout.Height(25)};
+        private readonly GUILayoutOption[] _toolBarOptions = { GUILayout.MaxWidth(350), GUILayout.Height(25) };
 
         #region Model Tab Properties
         // Scene
@@ -113,12 +113,9 @@ namespace BlenderImporter
             _secondaryUVMarginMethod = serializedObject.FindProperty("ms.secondaryUVMarginMethod");
             _secondaryUVMinLightmapResolution = serializedObject.FindProperty("ms.secondaryUVMinLightmapResolution");
             _secondaryUVMinObjectScale = serializedObject.FindProperty("ms.secondaryUVMinObjectScale");
-            
-            
             #endregion
 
             #region AnimationTabProperties
-
             _importConstraints = serializedObject.FindProperty("ms.importConstraints");
             _importAnimation = serializedObject.FindProperty("ms.importAnimation");
             _resampleCurves = serializedObject.FindProperty("ms.resampleCurves");
@@ -127,16 +124,18 @@ namespace BlenderImporter
             _animationPositionError = serializedObject.FindProperty("ms.animationPositionError");
             _animationScaleError = serializedObject.FindProperty("ms.animationScaleError");
             _importAnimatedCustomProperties = serializedObject.FindProperty("ms.importAnimatedCustomProperties");
-            
             #endregion
         }
         
         public override void OnInspectorGUI()
         {            
             serializedObject.Update();
-            
-            _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings, null , GUI.ToolbarButtonSize.FitToContents, _toolBarOptions);
 
+
+            GUILayout.BeginArea(new Rect(Screen.width/2 - 120,5,300,30));
+            _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings, null , GUI.ToolbarButtonSize.FitToContents, _toolBarOptions);
+            GUILayout.EndArea();
+            GUILayout.Space(30);
             switch (_toolbarInt)
             {
                 case 0:
@@ -153,10 +152,6 @@ namespace BlenderImporter
                     break;
                 default:
                     throw new Exception("Invalid Tab Index");
-            }
-            if (_toolbarInt == 1)
-            {
-                DrawModelTab();
             }
             
             serializedObject.ApplyModifiedProperties();
@@ -236,20 +231,25 @@ namespace BlenderImporter
         // ReSharper disable Unity.PerformanceAnalysis
         private void DrawMaterialTab()
         {
-            // Create a gui label "Textures" next to the button
+            // Button Options
+            // TODO: Add half width buttons
+            // Extract Textures
+            EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Textures");
-            
-            // create an "Extract Textures..." button
             if (GUILayout.Button("Extract Textures..."))
             {
-                // call the ExtractTextures method
                 Debug.LogWarning("EXTRACT TEXTURES TODO");
             }
+            EditorGUILayout.EndHorizontal();
             
+            // Extract Materials
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Materials");
             if(GUILayout.Button("Extract Materials..."))
             {
                 Debug.LogWarning("EXTRACT MATERIALS TODO");
             }
+            EditorGUILayout.EndHorizontal();
         }
     }
 }

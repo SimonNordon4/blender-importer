@@ -199,7 +199,7 @@ namespace BlenderImporter
             EditorGUILayout.PropertyField(_bakeAnimation, new GUIContent("Bake Animation"));
             EditorGUILayout.PropertyField(_bakeAnimationNlaStrips, new GUIContent("Bake Animation NLA Strips"));
             EditorGUILayout.PropertyField(_bakeAnimationActions, new GUIContent("Bake Animation Actions"));
-            EditorGUILayout.PropertyField(_simplifyBakeAnimation, new GUIContent("Simple Bake Animation"));
+            EditorGUILayout.PropertyField(_simplifyBakeAnimation, new GUIContent("Simplify Bake Animation"));
         }
 
         private void DrawModelTab()

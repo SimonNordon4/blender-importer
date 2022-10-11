@@ -34,6 +34,8 @@ namespace BlenderImporter
             // We debug.log everytime a print line is registered in the blender process.
             process.OutputDataReceived += (sender, outputArgs) =>
             {  
+                // TODO: Add a check or tag to better filter messages.
+                
                 if (outputArgs != null)
                 {
                     Debug.Log(outputArgs.Data);

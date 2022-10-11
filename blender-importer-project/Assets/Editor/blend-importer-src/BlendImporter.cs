@@ -87,6 +87,7 @@ namespace BlenderImporter
     public class BlendImporterSettings
     {
         public enum ExportVisibleMode { Visible, All }
+        [Header("General")]
         public ExportVisibleMode exportVisible = ExportVisibleMode.Visible;
         
         [Flags]

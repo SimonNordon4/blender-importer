@@ -37,6 +37,7 @@ namespace BlenderImporter
 
         public override void OnImportAsset(AssetImportContext ctx)
         {
+            AssetDatabase.StartAssetEditing();
             _ctx = ctx;
             // TODO: Start a Blender Process
             // TODO: Export everything in the Blender File.
@@ -79,11 +80,11 @@ namespace BlenderImporter
             // _ctx.AddObjectToAsset(fbxPath, fbxObject);
             // _ctx.SetMainObject(fbxObject);
 
-            AssetDatabase.Refresh();
+
 
             //AssetDatabase.DeleteAsset(fbxPath);
+            AssetDatabase.StopAssetEditing();
 
-            AssetDatabase.Refresh();
 
             Debug.Log("Blender Process Finished");
         }

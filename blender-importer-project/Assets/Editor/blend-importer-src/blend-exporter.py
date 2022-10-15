@@ -2,8 +2,39 @@
 import sys
 import bpy
 import json
+import enum
 
-
+class ExportVisibleMode(enum.Enum):
+    VISIBLE = 0
+    ALL = 1
+    
+class ExportTypes(enum.IntFlag):
+    Empty = 1
+    Camera = 2
+    Light = 4
+    Armature = 8
+    Mesh = 16
+    Other = 32
+    
+class CollectionExportMode(enum.Enum):
+    Include = 0
+    Exclude = 1
+    
+@dataclass 
+class BlenderImportsettings:
+    exportVisible: ExportVisibleMode
+    exportObjects: ExportTypes
+    exportCollections: bool
+    collectionFilterMode: CollectionExportMode
+    collectionNames: List[str]
+    triangulateMesh: bool
+    applyModifiers: bool
+    embedTextures: bool
+    bakeAnimation: bool
+    bakeAnimationNlaStrips: bool
+    bakeAnimationActions: bool
+    simplifyBakeAnimation: int
+    
 #export methods
 @staticmethod
 def init_exporter():
@@ -75,6 +106,8 @@ json_file = blend_file + ".json"
 # load json
 # todo: load this into a data class.
 with open(json_file) as f:
-    import_settings = json.load(f)
+    blender_settings = json.loads(f.read(), object_hook=lambda d: SimpleNamespace(**d))
+    
+print("BLENDER SETTINGS EXPORT Collections:", blender_settings.exportCollections)
     
 

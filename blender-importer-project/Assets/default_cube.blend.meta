@@ -22,7 +22,7 @@ ScriptedImporter:
     bakeAnimation: 1
     bakeAnimationNlaStrips: 1
     bakeAnimationActions: 1
-    simplifyBakeAnimation: 1
+    simplifyBakeAnimation: 2
   ms:
     globalScale: 1
     useFileUnits: 1

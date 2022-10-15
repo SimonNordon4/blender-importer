@@ -51,6 +51,12 @@ namespace BlenderImporter
                 @"E:\repos\blender-importer\blender-importer-project\Assets\Editor\blend-importer-src\blend-exporter.py";
             var blendFilePath = ctx.assetPath;
             var args = "";
+            
+            // Write blender settings to a json.
+            var jsonString = EditorJsonUtility.ToJson(bs);
+            var jsonPath = blendFilePath + ".json";
+            System.IO.File.WriteAllText(jsonPath, jsonString);
+            
 
             BlenderProcessHandler.RunBlender(blenderExecutable, pythonScript, blendFilePath, args,
                 onBlenderProcessFinished);

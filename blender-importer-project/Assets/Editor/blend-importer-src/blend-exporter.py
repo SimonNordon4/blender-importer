@@ -1,24 +1,8 @@
 ﻿import os
 import sys
 import bpy
+import json
 
-@staticmethod
-def resolve_arguments(argv):
-    ''' Convert arguments to a dictonary '''
-    # TODO: This could be a json file instead of argument list dictionary.
-    settings = {}
-    if "--" not in argv:  # no arguments, return nothing.
-        return settings
-
-    argv = argv[argv.index("--") + 1:]
-    print(argv)
-    for arg in argv:
-        if "=" in arg:
-            key, value = arg.split("=")
-            settings[key] = value
-        else:
-            print("ERROR: find argument in non dictionary format: " + arg)
-    return settings
 
 #export methods
 @staticmethod
@@ -60,29 +44,37 @@ def collections_to_objects(exclude, collection_names):
             parent_obj = empty_dict[collection]
             child_obj.parent = parent_obj
 
-# Get the arguments
-import_settings = resolve_arguments(sys.argv)
+@staticmethod
+def export_fbx(filepath, export_settings):
+    if blender280:
+        export_collections = import_settings.get("export_collections", "true").lower() == "true"
+        if(export_collections):
+            {args.ExportCollectionMethod}
+        bpy.ops.export_scene.fbx(filepath=outfile,
+                                 check_existing=False,
+                                 use_selection=False,
+                                 use_visible={args.ExportVisible},
+                                 use_active_collection=False,
+                                 object_types={args.ExportObjects},
+                                 use_mesh_modifiers={args.ApplyModifiers},
+                                 mesh_smooth_type='OFF',
+                                 use_custom_props=True,
+                                 use_triangles={args.TriangulateMesh},
+                                 bake_anim={args.BakeAnimation},
+                                 bake_anim_use_nla_strips={args.BakeAnimationNLAStrips},
+                                 bake_anim_use_all_actions={args.BakeAnimationActions},
+                                 bake_anim_simplify_factor={args.SimplifyBakeAnimation},
+                                 path_mode='{args.PathMode}',
+                                 embed_textures={args.EmbedTextures},
+                                 apply_scale_options='FBX_SCALE_ALL')
 
-if blender280:
-    # Export Collections
-    # init_exporter()
-    export_collections = import_settings.get("export_collections", "true").lower() == "true"
-    if(export_collections):
-        {args.ExportCollectionMethod}
-    bpy.ops.export_scene.fbx(filepath=outfile,
-                             check_existing=False,
-                             use_selection=False,
-                             use_visible={args.ExportVisible},
-                             use_active_collection=False,
-                             object_types={args.ExportObjects},
-                             use_mesh_modifiers={args.ApplyModifiers},
-                             mesh_smooth_type='OFF',
-                             use_custom_props=True,
-                             use_triangles={args.TriangulateMesh},
-                             bake_anim={args.BakeAnimation},
-                             bake_anim_use_nla_strips={args.BakeAnimationNLAStrips},
-                             bake_anim_use_all_actions={args.BakeAnimationActions},
-                             bake_anim_simplify_factor={args.SimplifyBakeAnimation},
-                             path_mode='{args.PathMode}',
-                             embed_textures={args.EmbedTextures},
-                             apply_scale_options='FBX_SCALE_ALL')
+# get the current open blend file
+blend_file = bpy.data.filepath
+# get the json
+json_file = blend_file + ".json"
+# load json
+# todo: load this into a data class.
+with open(json_file) as f:
+    import_settings = json.load(f)
+    
+

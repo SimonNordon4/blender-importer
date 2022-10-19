@@ -1,14 +1,1 @@
-{
-  "exportVisible": 0,
-  "exportObjects": 63,
-  "exportCollections": true,
-  "collectionFilterMode": 1,
-  "collectionNames": [],
-  "triangulateMesh": false,
-  "applyModifiers": true,
-  "embedTextures": true,
-  "bakeAnimation": true,
-  "bakeAnimationNlaStrips": true,
-  "bakeAnimationActions": true,
-  "simplifyBakeAnimation": 2
-}
+{"exportVisible":0,"exportObjects":63,"exportCollections":true,"collectionFilterMode":1,"collectionNames":[],"triangulateMesh":false,"applyModifiers":true,"embedTextures":true,"bakeAnimation":true,"bakeAnimationNlaStrips":true,"bakeAnimationActions":true,"simplifyBakeAnimation":2}

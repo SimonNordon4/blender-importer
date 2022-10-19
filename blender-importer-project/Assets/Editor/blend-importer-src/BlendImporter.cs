@@ -39,9 +39,6 @@ namespace BlenderImporter
         {
             AssetDatabase.StartAssetEditing();
             _ctx = ctx;
-            // TODO: Start a Blender Process
-            // TODO: Export everything in the Blender File.
-            // TODO: Mark when it's completed.
             // To begin with, let's just export the file by opening a blender process.
             Debug.Log("Starting Custom Blender Importer");
             BlenderProcessHandler.OnBlenderProcessFinished onBlenderProcessFinished = BlendProcessFinished;

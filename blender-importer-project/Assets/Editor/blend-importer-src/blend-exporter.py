@@ -54,7 +54,7 @@ def remove_objects(objects):
 
 @staticmethod
 def collections_to_objects(exclude, collection_names):
-    empty_dict = {{}}
+    empty_dict = {}
     processed_collections = []
     # First create an empty for each collection
     for collection in bpy.data.collections:
@@ -81,24 +81,45 @@ def collections_to_objects(exclude, collection_names):
             child_obj.parent = parent_obj
 
 @staticmethod
-def export_fbx(filepath, bs = None):
+def export_fbx(file_path, bs = None):
+    blender280 = (2,80,0) <= bpy.app.version
     if blender280:
-        bpy.ops.export_scene.fbx(filepath=filepath,
+        print("OBJECT TYPES: ", bs.exportObjects)
+        print("FILEPATH: ", file_path)
+        use_visible = bs.exportVisible == ExportVisibleMode.VISIBLE
+        path_mode = 'COPY' if bs.embedTextures else 'AUTO'
+        
+        # create a set of string fro bs.exportObjects
+        export_types = set()
+        if bs.exportObjects & ExportTypes.Empty:
+            export_types.add('EMPTY')
+        if bs.exportObjects & ExportTypes.Camera:
+            export_types.add('CAMERA')
+        if bs.exportObjects & ExportTypes.Light:
+            export_types.add('LIGHT')
+        if bs.exportObjects & ExportTypes.Armature:
+            export_types.add('ARMATURE')
+        if bs.exportObjects & ExportTypes.Mesh:
+            export_types.add('MESH')
+        if bs.exportObjects & ExportTypes.Other:
+            export_types.add('OTHER')
+        
+        bpy.ops.export_scene.fbx(filepath=file_path,
                                  check_existing=False,
                                  use_selection=False,
-                                 use_visible={bs.ExportVisible == ExportVisibleMode.VISIBLE},
+                                 use_visible=use_visible,
                                  use_active_collection=False,
-                                 object_types={bs.ExportObjects}, # TODO FORMAT THIS
-                                 use_mesh_modifiers={bs.ApplyModifiers},
+                                 object_types=export_types, # TODO FORMAT THIS
+                                 use_mesh_modifiers=bs.applyModifiers,
                                  mesh_smooth_type='OFF',
                                  use_custom_props=True,
-                                 use_triangles={bs.TriangulateMesh},
-                                 bake_anim={bs.BakeAnimation},
-                                 bake_anim_use_nla_strips={bs.BakeAnimationNLAStrips},
-                                 bake_anim_use_all_actions={bs.BakeAnimationActions},
-                                 bake_anim_simplify_factor={bs.SimplifyBakeAnimation},
-                                 path_mode='{args.PathMode}', # TODO FORMAT THIS
-                                 embed_textures={bs.EmbedTextures},
+                                 use_triangles=bs.triangulateMesh,
+                                 bake_anim=bs.bakeAnimation,
+                                 bake_anim_use_nla_strips=bs.bakeAnimationNlaStrips,
+                                 bake_anim_use_all_actions=bs.bakeAnimationActions,
+                                 bake_anim_simplify_factor=bs.simplifyBakeAnimation,
+                                 path_mode=path_mode,
+                                 embed_textures=bs.embedTextures,
                                  apply_scale_options='FBX_SCALE_ALL')
 
 # get the current open blend file
@@ -116,8 +137,9 @@ init_exporter()
 # check if we're exporting collections
 if blender_settings.exportCollections:
     # if we are, we need to convert the collections to objects
-    collections_to_objects(blender_settings.collectionFilterMode == CollectionExportMode.Exclude,
-                           blender_settings.collectionNames)
+    filter_mode = blender_settings.collectionFilterMode == CollectionExportMode.Exclude
+    print("FILTER MODE: ", filter_mode)
+    collections_to_objects(filter_mode, blender_settings.collectionNames)
 
 #export the fbx back to Unity
 export_fbx(blend_file + ".fbx", blender_settings)

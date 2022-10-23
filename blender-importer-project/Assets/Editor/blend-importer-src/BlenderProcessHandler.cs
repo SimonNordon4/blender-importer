@@ -38,7 +38,7 @@ namespace BlenderImporter
                 
                 if (outputArgs != null)
                 {
-                    Debug.Log(outputArgs.Data);
+                    Debug.Log("\tpython:" + outputArgs.Data);
                 }
             };
 

@@ -11,18 +11,18 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: d3a4d5aedb8a49ab9bdda8edd61183f3, type: 3}
   advancedImportMode: 0
   bs:
-    exportVisible: 0
-    exportObjects: 63
+    exportVisible: 1
+    exportObjects: -1
     exportCollections: 1
     collectionFilterMode: 1
     collectionNames: []
-    triangulateMesh: 0
+    triangulateMesh: 1
     applyModifiers: 1
     embedTextures: 1
     bakeAnimation: 1
     bakeAnimationNlaStrips: 1
     bakeAnimationActions: 1
-    simplifyBakeAnimation: 2
+    simplifyBakeAnimation: 1
   ms:
     globalScale: 1
     useFileUnits: 1

@@ -40,12 +40,12 @@ class BlenderImportSettings:
         self.simplifyBakeAnimation = json_ref["simplifyBakeAnimation"]
 
 
-#export methods
-@staticmethod
-def init_exporter():
-    if bpy.context.object.mode == 'EDIT':
-        bpy.ops.object.mode_set(mode='OBJECT')
-    bpy.ops.object.select_all(action='DESELECT')
+# #export methods
+# @staticmethod
+# def init_exporter():
+#     if bpy.context.object.mode == 'EDIT':
+#         bpy.ops.object.mode_set(mode='OBJECT')
+#     bpy.ops.object.select_all(action='DESELECT')
 
 @staticmethod
 def remove_objects(objects):
@@ -109,7 +109,7 @@ def export_fbx(file_path, bs = None):
                                  use_selection=False,
                                  use_visible=use_visible,
                                  use_active_collection=False,
-                                 object_types=export_types, # TODO FORMAT THIS
+                                 object_types=export_types,
                                  use_mesh_modifiers=bs.applyModifiers,
                                  mesh_smooth_type='OFF',
                                  use_custom_props=True,
@@ -131,15 +131,15 @@ with open(json_file) as f:
     json_dict = json.load(f)
     blender_settings = BlenderImportSettings(json_dict)
     
-#init the export
-init_exporter()
-
 # check if we're exporting collections
 if blender_settings.exportCollections:
     # if we are, we need to convert the collections to objects
     filter_mode = blender_settings.collectionFilterMode == CollectionExportMode.Exclude
     print("FILTER MODE: ", filter_mode)
     collections_to_objects(filter_mode, blender_settings.collectionNames)
+    
+# apply all transforms
+bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
 
 #export the fbx back to Unity
 export_fbx(blend_file + ".fbx", blender_settings)

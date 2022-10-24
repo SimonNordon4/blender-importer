@@ -6,6 +6,30 @@ ModelImporter:
   - first:
       74: -3999578356269874737
     second: Cube|CubeAction
+  - first:
+      74: -7918129362319027497
+    second: Cube|CubeAction.001
+  - first:
+      74: -4473016424031684122
+    second: Cube|CubeAction.002
+  - first:
+      74: 17017395923089283
+    second: Cube.001|CubeAction
+  - first:
+      74: 7693504525942378453
+    second: Cube.001|CubeAction.001
+  - first:
+      74: 3995525487012296551
+    second: Cube.001|CubeAction.002
+  - first:
+      74: -2569477126889815120
+    second: Cube.002|CubeAction
+  - first:
+      74: -2572907464589091492
+    second: Cube.002|CubeAction.001
+  - first:
+      74: 7600187681039703104
+    second: Cube.002|CubeAction.002
   externalObjects: {}
   materials:
     materialImportMode: 2

@@ -60,30 +60,39 @@ namespace BlenderImporter
                 onBlenderProcessFinished);
         }
 
+        /// <summary>
+        /// Called when the Blender Process has finished exporting the FBX.
+        /// </summary>
+        /// <remarks>The import will continue in the FBXProcessor.cs</remarks>
+        /// <param name="outputPath"></param>
+        /// <param name="success"></param>
         private void BlendProcessFinished(string outputPath, bool success)
         {
-            AssetDatabase.Refresh();
-
-            // get the fbx.
             var fbxPath = outputPath + ".fbx";
             Debug.Log("FBX Path: " + fbxPath);
-
 
             var fbxObject = AssetDatabase.LoadAssetAtPath<GameObject>(fbxPath);
             Debug.Log("FBX Object: " + fbxObject);
 
-            // var mesh = fbxObject.GetComponent<MeshFilter>().sharedMesh;
-            // _ctx.AddObjectToAsset(fbxPath,mesh);
-            // _ctx.AddObjectToAsset(fbxPath, fbxObject);
-            // _ctx.SetMainObject(fbxObject);
+            // Get all objects under the fbx.
+            var fbxObjects = AssetDatabase.LoadAllAssetsAtPath(fbxPath);
+            foreach (var fbxObj in fbxObjects)
+            {
+                Debug.Log(fbxObj.name);
+                _ctx.AddObjectToAsset(fbxObj.name, fbxObj);
+            }
+            
 
-
+            _ctx.SetMainObject(fbxObject);
 
             //AssetDatabase.DeleteAsset(fbxPath);
             AssetDatabase.StopAssetEditing();
-
-
             Debug.Log("Blender Process Finished");
+        }
+
+        public void FBXFinishedImporting()
+        {
+            
         }
     }
     

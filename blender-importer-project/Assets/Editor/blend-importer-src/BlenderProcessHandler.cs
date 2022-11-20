@@ -44,7 +44,10 @@ namespace BlenderImporter
 
             process.ErrorDataReceived += (sender, errorArgs) =>
             {
-                if (errorArgs != null) Debug.LogError(errorArgs.Data);
+                if (errorArgs != null)
+                {
+                    Debug.LogError("\tpython ERROR: " + errorArgs.Data);
+                }
             };
             process.Start();
             process.BeginOutputReadLine();

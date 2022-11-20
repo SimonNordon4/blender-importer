@@ -6,11 +6,15 @@ using UnityEngine.Windows;
 namespace BlenderImporter
 {
     /// <summary>
-    /// Used to apply BlendImporter Settings to any imported FBX files.
+    /// Used to apply BlendImporter Settings to any imported FBX files,
+    /// as well as confirm when the FBX has finished importing.
     /// </summary>
     public class FBXPreProcessor : AssetPostprocessor
     {
         //https://gist.github.com/TJHeuvel/f74acbbbcfe8e84e59fa41ebff774f35
+        /// <summary>
+        /// Preprocess the FBX by applying the correct settings.
+        /// </summary>
         private void OnPreprocessAsset()
         {
             var path = assetPath;
@@ -68,6 +72,13 @@ namespace BlenderImporter
                 modelImporter.secondaryUVMinLightmapResolution = b.ms.secondaryUVMinLightmapResolution;
                 modelImporter.secondaryUVMinObjectScale = b.ms.secondaryUVMinObjectScale;
             }
+        }
+
+        private void OnPostprocessPrefab(GameObject g)
+        {
+            // this method works but the fbx doesn't finish importing until clicking
+            // out of the window and then back in..
+            Debug.Log($"OnPostprocessPrefab: {g.name}");
         }
     }
 }

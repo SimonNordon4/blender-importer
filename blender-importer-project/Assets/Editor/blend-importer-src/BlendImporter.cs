@@ -8,7 +8,7 @@ using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace BlenderImporter
+namespace BlenderImporterV1
 {
     [ScriptedImporter(1, new[] { "made_by_simon" }, new[] { "blend" })]
     public class BlendImporter : ScriptedImporter

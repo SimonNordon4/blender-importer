@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-namespace BlenderImporter
+namespace BlenderImporterV1
 {
     public static class BlenderProcessHandler
     {

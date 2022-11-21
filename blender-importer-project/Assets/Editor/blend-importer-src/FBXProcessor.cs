@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
 
-namespace BlenderImporter
+namespace BlenderImporterV1
 {
     /// <summary>
     /// Used to apply BlendImporter Settings to any imported FBX files,

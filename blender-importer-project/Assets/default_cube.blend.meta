@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 19e57cfd59123ad4c8b0a08be879d951
-importerOverride: Assembly-CSharp-Editor:BlenderImporter:BlendImporter
+importerOverride: Assembly-CSharp-Editor:BlenderImporterV1:BlendImporter
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,12 +11,12 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: d3a4d5aedb8a49ab9bdda8edd61183f3, type: 3}
   advancedImportMode: 0
   bs:
-    exportVisible: 1
-    exportObjects: -1
+    exportVisible: 0
+    exportObjects: 63
     exportCollections: 1
     collectionFilterMode: 1
     collectionNames: []
-    triangulateMesh: 1
+    triangulateMesh: 0
     applyModifiers: 1
     embedTextures: 1
     bakeAnimation: 1
@@ -49,16 +49,16 @@ ScriptedImporter:
     importTangents: 3
     swapUVChannels: 0
     generateSecondaryUV: 0
-    secondaryUVHardAngle: 48.4
+    secondaryUVHardAngle: 88
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15
     secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
-    importConstraints: 1
+    importConstraints: 0
     importAnimation: 1
     resampleCurves: 1
-    animationCompression: 1
+    animationCompression: 2
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5

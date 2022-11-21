@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace BlenderImporter
+namespace BlenderImporterV1
 {
     /// <summary>
     /// We have to apply the BlenderScriptedImporter to any .blend files we want to import.

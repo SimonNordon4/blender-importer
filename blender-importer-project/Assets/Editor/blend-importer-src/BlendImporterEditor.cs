@@ -5,7 +5,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BlenderImporter
+namespace BlenderImporterV1
 {
     [CustomEditor(typeof(BlendImporter))]
     public class BlendImporterEditor : ScriptedImporterEditor

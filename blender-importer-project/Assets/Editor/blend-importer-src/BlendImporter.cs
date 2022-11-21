@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 
 namespace BlenderImporterV1
 {
-    [ScriptedImporter(1, new[] { "made_by_simon" }, new[] { "blend" })]
+    [ScriptedImporter(1, new[] { "made_by_simonv1" }, new[] { "blendv1" })]
     public class BlendImporter : ScriptedImporter
     {
         public static Dictionary<string, BlendImporter> Importers = new Dictionary<string, BlendImporter>();

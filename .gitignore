@@ -54,6 +54,8 @@ ExportedObj/
 *.blend1.meta
 *.blend.json
 *.blend.json.meta
+*.mat
+*.mat.meta
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -87,3 +89,4 @@ blender-importer-project/Library/Artifacts/00/007ba677cdbea063a184a2ecf9e00874
 blender-importer-project/Assets/01-scripts/ublend/blender_export.ublend
 blender-importer-project/Assets/stylized_hammer.blend
 blender-importer-project/Assets/default_cube.blend.json
+blender-importer-project/Assets/Materials/stylized_hammer-pok.mat

@@ -1,4 +1,5 @@
 ﻿using System;
+using BlenderImporter.Data;
 using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
@@ -30,27 +31,20 @@ namespace BlenderImporter.UI
         public override void OnEnable()
         {
             base.OnEnable();
-            var blendSettings = serializedObject.FindProperty("BlendSettings");
-            Debug.Log(blendSettings);
-            
-            // This works.
-            Debug.Log(serializedObject.FindProperty("Test").name);
-            // This doesn't.
-            Debug.Log(serializedObject.FindProperty("BlendSettings").name);
             
             #region Blender Tab Properties
-            // _exportVisible = serializedObject.FindProperty("BlendSettings.ExportVisible");
-            // _exportObjects = serializedObject.FindProperty("BlendSettings.ExportObjects");
-            // _exportCollections = serializedObject.FindProperty("BlendSettings.ExportCollections");
-            // _collectionFilterMode = serializedObject.FindProperty("BlendSettings.CollectionFilterMode");
-            // _collectionNames = serializedObject.FindProperty("BlendSettings.CollectionNames");
-            // _triangulateMesh = serializedObject.FindProperty("BlendSettings.TriangulateMesh");
-            // _applyModifiers = serializedObject.FindProperty("BlendSettings.ApplyModifiers");
-            // _embedTextures = serializedObject.FindProperty("BlendSettings.EmbedTextures");
-            // _bakeAnimation = serializedObject.FindProperty("BlendSettings.BakeAnimation");
-            // _bakeAnimationNlaStrips = serializedObject.FindProperty("BlendSettings.BakeAnimationNlaStrips");
-            // _bakeAnimationActions = serializedObject.FindProperty("BlendSettings.BakeAnimationActions");
-            // _simplifyBakeAnimation = serializedObject.FindProperty("BlendSettings.SimplifyBakeAnimation");
+            _exportObjects = serializedObject.FindProperty("blendSettings.exportObjects");
+            _exportCollections = serializedObject.FindProperty("blendSettings.exportCollections");
+            _exportVisible = serializedObject.FindProperty("blendSettings.exportVisible");
+            _collectionFilterMode = serializedObject.FindProperty("blendSettings.collectionFilterMode");
+            _collectionNames = serializedObject.FindProperty("blendSettings.collectionNames");
+            _triangulateMesh = serializedObject.FindProperty("blendSettings.triangulateMesh");
+            _applyModifiers = serializedObject.FindProperty("blendSettings.applyModifiers");
+            _embedTextures = serializedObject.FindProperty("blendSettings.embedTextures");
+            _bakeAnimation = serializedObject.FindProperty("blendSettings.bakeAnimation");
+            _bakeAnimationNlaStrips = serializedObject.FindProperty("blendSettings.bakeAnimationNlaStrips");
+            _bakeAnimationActions = serializedObject.FindProperty("blendSettings.bakeAnimationActions");
+            _simplifyBakeAnimation = serializedObject.FindProperty("blendSettings.simplifyBakeAnimation");
             #endregion
         }
 
@@ -88,17 +82,17 @@ namespace BlenderImporter.UI
         private void DrawBlenderTab()
         {
             EditorGUILayout.PropertyField(_exportVisible, new GUIContent("Export Visible"));
-            // EditorGUILayout.PropertyField(_exportObjects, new GUIContent("Export Objects"));
-            // EditorGUILayout.PropertyField(_exportCollections, new GUIContent("Export Collections"));
-            // EditorGUILayout.PropertyField(_collectionFilterMode, new GUIContent("Collection Filter Mode"));
-            // EditorGUILayout.PropertyField(_collectionNames, new GUIContent("Collection Names"));
-            // EditorGUILayout.PropertyField(_triangulateMesh, new GUIContent("Triangulate Mesh"));
-            // EditorGUILayout.PropertyField(_applyModifiers, new GUIContent("Apply Modifiers"));
-            // EditorGUILayout.PropertyField(_embedTextures, new GUIContent("Embed Textures"));
-            // EditorGUILayout.PropertyField(_bakeAnimation, new GUIContent("Bake Animation"));
-            // EditorGUILayout.PropertyField(_bakeAnimationNlaStrips, new GUIContent("Bake Animation NLA Strips"));
-            // EditorGUILayout.PropertyField(_bakeAnimationActions, new GUIContent("Bake Animation Actions"));
-            // EditorGUILayout.PropertyField(_simplifyBakeAnimation, new GUIContent("Simplify Bake Animation"));
+            EditorGUILayout.PropertyField(_exportObjects, new GUIContent("Export Objects"));
+            EditorGUILayout.PropertyField(_exportCollections, new GUIContent("Export Collections"));
+            EditorGUILayout.PropertyField(_collectionFilterMode, new GUIContent("Collection Filter Mode"));
+            EditorGUILayout.PropertyField(_collectionNames, new GUIContent("Collection Names"));
+            EditorGUILayout.PropertyField(_triangulateMesh, new GUIContent("Triangulate Mesh"));
+            EditorGUILayout.PropertyField(_applyModifiers, new GUIContent("Apply Modifiers"));
+            EditorGUILayout.PropertyField(_embedTextures, new GUIContent("Embed Textures"));
+            EditorGUILayout.PropertyField(_bakeAnimation, new GUIContent("Bake Animation"));
+            EditorGUILayout.PropertyField(_bakeAnimationNlaStrips, new GUIContent("Bake Animation NLA Strips"));
+            EditorGUILayout.PropertyField(_bakeAnimationActions, new GUIContent("Bake Animation Actions"));
+            EditorGUILayout.PropertyField(_simplifyBakeAnimation, new GUIContent("Simplify Bake Animation"));
         }
     }
 

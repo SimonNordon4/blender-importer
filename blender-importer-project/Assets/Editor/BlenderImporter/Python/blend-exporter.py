@@ -26,17 +26,17 @@ class CollectionExportMode(enum.Enum):
 
 class BlenderImportSettings:
     def __init__(self, json_ref):
-        self.exportVisible = ExportVisibleMode(json_ref["ExportVisible"])
-        self.exportObjects = ExportTypes(json_ref["ExportObjects"])
-        self.exportCollections = json_ref["ExportCollections"]
-        self.collectionFilterMode = CollectionExportMode(json_ref["CollectionFilterMode"])
-        self.collectionNames = json_ref["CollectionNames"]
-        self.triangulateMesh = json_ref["TriangulateMesh"]
-        self.applyModifiers = json_ref["ApplyModifiers"]
-        self.embedTextures = json_ref["EmbedTextures"]
-        self.bakeAnimation = json_ref["BakeAnimation"]
-        self.bakeAnimationNlaStrips = json_ref["BakeAnimationNlaStrips"]
-        self.bakeAnimationActions = json_ref["BakeAnimationActions"]
+        self.exportVisible = ExportVisibleMode(json_ref["exportVisible"])
+        self.exportObjects = ExportTypes(json_ref["exportObjects"])
+        self.exportCollections = json_ref["exportCollections"]
+        self.collectionFilterMode = CollectionExportMode(json_ref["collectionFilterMode"])
+        self.collectionNames = json_ref["collectionNames"]
+        self.triangulateMesh = json_ref["triangulateMesh"]
+        self.applyModifiers = json_ref["applyModifiers"]
+        self.embedTextures = json_ref["embedTextures"]
+        self.bakeAnimation = json_ref["bakeAnimation"]
+        self.bakeAnimationNlaStrips = json_ref["bakeAnimationNlaStrips"]
+        self.bakeAnimationActions = json_ref["bakeAnimationActions"]
         self.simplifyBakeAnimation = json_ref["SimplifyBakeAnimation"]
 
 

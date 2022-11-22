@@ -19,7 +19,7 @@ namespace BlenderImporterV1
         public bool advancedImportMode;
 
         /// <summary> Blend Importer Settings </summary>
-        public BlendImporterSettings bs;
+        //public BlendImporterSettings bs;
         
         /// <summary> Model Importer Settings </summary>
         public ModelImporterSettings ms;
@@ -51,9 +51,9 @@ namespace BlenderImporterV1
             var args = "";
             
             // Write blender settings to a json.
-            var jsonString = EditorJsonUtility.ToJson(bs);
+            //var jsonString = EditorJsonUtility.ToJson(bs);
             var jsonPath = blendFilePath + ".json";
-            System.IO.File.WriteAllText(jsonPath, jsonString);
+            //System.IO.File.WriteAllText(jsonPath, jsonString);
             
 
             BlenderProcessHandler.RunBlender(blenderExecutable, pythonScript, blendFilePath, args,
@@ -96,35 +96,7 @@ namespace BlenderImporterV1
         }
     }
     
-    [Serializable]
-    public class BlendImporterSettings
-    {
-        public enum ExportVisibleMode { Visible, All }
-        [Header("General")]
-        public ExportVisibleMode exportVisible = ExportVisibleMode.Visible;
-        
-        [Flags]
-        public enum ExportTypes { EMPTY = 1, CAMERA = 2, LIGHT = 4, ARMATURE = 8, MESH = 16, OTHER = 32 }
-        public ExportTypes exportObjects = ExportTypes.EMPTY | ExportTypes.CAMERA | ExportTypes.LIGHT | ExportTypes.ARMATURE | ExportTypes.MESH | ExportTypes.OTHER;
-        
-        [Header("Collection Settings")]
-        public bool exportCollections = true;
-        public enum CollectionExportMode { Include, Exclude }
-        public CollectionExportMode collectionFilterMode = CollectionExportMode.Exclude;
-        public List<string> collectionNames = new List<string>();
-
-        [Header("Mesh Settings")]
-        public bool triangulateMesh = false;
-        public bool applyModifiers = true;
-        public bool embedTextures = true;
-
-        [Header("Animation Settings")]
-        public bool bakeAnimation = true;
-        public bool bakeAnimationNlaStrips = true;
-        public bool bakeAnimationActions = true;
-        [UnityEngine.Range(0,100)]
-        public int simplifyBakeAnimation = 1;
-    }
+    
 
     [Serializable]
     public class ModelImporterSettings

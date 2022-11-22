@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BlenderImporter.Data;
 using UnityEditor.AssetImporters;
 
 namespace BlenderImporter
@@ -14,6 +15,10 @@ namespace BlenderImporter
         /// </summary>
         public static Dictionary<string, BlendImporter> BlendImporters = new Dictionary<string, BlendImporter>();
 
+        //public BlendImportSettings BlendSettings;
+        public bool BlendSettings;
+        public bool Test = true;
+    
         public override void OnImportAsset(AssetImportContext ctx)
         {
             

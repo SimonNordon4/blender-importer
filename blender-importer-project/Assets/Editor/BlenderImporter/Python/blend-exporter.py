@@ -84,8 +84,6 @@ def collections_to_objects(exclude, collection_names):
 def export_fbx(file_path, bs = None):
     blender280 = (2,80,0) <= bpy.app.version
     if blender280:
-        print("OBJECT TYPES: ", bs.exportObjects)
-        print("FILEPATH: ", file_path)
         use_visible = bs.exportVisible == ExportVisibleMode.VISIBLE
         path_mode = 'COPY' if bs.embedTextures else 'AUTO'
         
@@ -126,6 +124,8 @@ def export_fbx(file_path, bs = None):
 blend_file = bpy.data.filepath
 # get the json
 json_file = blend_file + ".json"
+
+#TODO: Put this in a class and make it much cleaner, add default settings incase no blender_settings.json is found.
 # load json
 with open(json_file) as f:
     json_dict = json.load(f)

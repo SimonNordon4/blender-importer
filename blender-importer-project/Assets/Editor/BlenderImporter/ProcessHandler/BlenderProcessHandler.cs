@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using BlenderImporter.Events;
 using Debug = UnityEngine.Debug;
 
 namespace BlenderImporter.ProcessHandler
@@ -55,7 +56,7 @@ namespace BlenderImporter.ProcessHandler
             process.CancelOutputRead();
             process.CancelErrorRead();
             
-            OnBlenderProcessFinished?.Invoke(blendFilePath, process.ExitCode == 0);
+            EventManager.OnBlenderProcessFinished?.Invoke(process.ExitCode == 0);
         }
     }
 }

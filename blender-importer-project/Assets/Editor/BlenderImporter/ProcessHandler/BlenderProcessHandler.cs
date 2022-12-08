@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using BlenderImporter.Events;
+﻿using System;
+using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
 namespace BlenderImporter.ProcessHandler
@@ -12,7 +12,8 @@ namespace BlenderImporter.ProcessHandler
         public static void RunBlender(string blenderExecutable,
             string pythonScriptPath,
             string blendFilePath,
-            string args)
+            string args,
+            Action Callback)
         {
             // set initial process arguments.
             var start = new ProcessStartInfo
@@ -56,7 +57,7 @@ namespace BlenderImporter.ProcessHandler
             process.CancelOutputRead();
             process.CancelErrorRead();
             
-            EventManager.OnBlenderProcessFinished?.Invoke(process.ExitCode == 0);
+            Callback.Invoke();
         }
     }
 }

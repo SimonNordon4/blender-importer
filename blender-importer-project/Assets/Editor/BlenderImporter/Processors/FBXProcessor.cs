@@ -66,5 +66,17 @@ namespace BlenderImporter.Processors
                 modelImporter.secondaryUVMinObjectScale = ms.secondaryUVMinObjectScale;
             }
         }
+
+        private void OnPostprocessModel(GameObject g)
+        {
+            // get the name of the imported file
+            var path = assetPath;
+            // remove the .fbx file extension
+            var blendPath = assetPath.Replace(".fbx", "");
+            // check if the blendpath exists in the blendimporters
+            if (!BlendImporter.BlendImporters.ContainsKey(blendPath)) return;
+            // call the blend process and pass in the imported model.
+            BlendImporter.BlendImporters[blendPath].FBXImported(g);
+        }
     }
 }

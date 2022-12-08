@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BlenderImporter.Data;
-using BlenderImporter.Events;
 using BlenderImporter.ProcessHandler;
 using UnityEditor;
 using UnityEditor.AssetImporters;
@@ -20,20 +19,14 @@ namespace BlenderImporter
         /// </summary>
         public static readonly Dictionary<string, BlendImporter> BlendImporters = new Dictionary<string, BlendImporter>();
 
+        /// <summary>
+        /// Unique action for when the blender process associated with this importer has finished.
+        /// </summary>
+        public Action BlenderProcessFinished() => BlendProcessFinished;
+        
         public BlendImportSettings blendSettings = new BlendImportSettings();
         public FBXImportSettings fbxSettings = new FBXImportSettings();
 
-        public BlendImporter()
-        {
-            EventManager.OnBlenderProcessFinished += BlendProcessFinished;
-            EventManager.OnFBXImported += FBXImported;
-        }
-        ~BlendImporter()
-        {
-            EventManager.OnBlenderProcessFinished -= BlendProcessFinished;
-            EventManager.OnFBXImported -= FBXImported;
-        }
-        
         /// <summary>
         /// Called when the .blend file is imported.
         /// </summary>
@@ -59,7 +52,7 @@ namespace BlenderImporter
             var settingsPath = blendFilePath + ".json";
             System.IO.File.WriteAllText(settingsPath, settingsJson);
             
-            BlenderProcessHandler.RunBlender(blenderExe, pythonScript, blendFilePath, args);
+            BlenderProcessHandler.RunBlender(blenderExe, pythonScript, blendFilePath, args,BlenderProcessFinished());
             
             AssetDatabase.StopAssetEditing();
         }
@@ -76,13 +69,13 @@ namespace BlenderImporter
             }
         }
 
-        private void BlendProcessFinished(bool success)
+        private void BlendProcessFinished()
         {
             Debug.Log("Blend Process has Finished!");
         }
-        private void FBXImported(string guid)
+        public void FBXImported(GameObject g)
         {
-            throw new System.NotImplementedException();
+           Debug.Log(g.name + " has been imported");
         }
     }
 }

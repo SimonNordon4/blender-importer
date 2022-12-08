@@ -13,7 +13,6 @@ namespace BlenderImporter.Processors
             // remove the fbx file extension
             var blendPath = assetPath.Replace(".fbx", "");
 
-            Debug.Log("OnPreprocessAsset: " + path);
             // Check if the fbx is associated with a blend file
             if (!File.Exists(blendPath)) return;
 

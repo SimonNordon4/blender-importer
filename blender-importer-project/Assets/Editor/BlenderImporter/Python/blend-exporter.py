@@ -26,6 +26,7 @@ class CollectionExportMode(enum.Enum):
 
 class BlenderImportSettings:
     def __init__(self, json_ref):
+        print("Transverting to BlenderImportSettings")
         self.exportVisible = ExportVisibleMode(json_ref["exportVisible"])
         self.exportObjects = ExportTypes(json_ref["exportObjects"])
         self.exportCollections = json_ref["exportCollections"]
@@ -37,7 +38,8 @@ class BlenderImportSettings:
         self.bakeAnimation = json_ref["bakeAnimation"]
         self.bakeAnimationNlaStrips = json_ref["bakeAnimationNlaStrips"]
         self.bakeAnimationActions = json_ref["bakeAnimationActions"]
-        self.simplifyBakeAnimation = json_ref["SimplifyBakeAnimation"]
+        self.simplifyBakeAnimation = json_ref["simplifyBakeAnimation"]
+        print("Finished transverting")
 
 
 # #export methods
@@ -120,6 +122,8 @@ def export_fbx(file_path, bs = None):
                                  embed_textures=bs.embedTextures,
                                  apply_scale_options='FBX_SCALE_ALL')
 
+print("STARTING BLENDER")
+
 # get the current open blend file
 blend_file = bpy.data.filepath
 # get the json
@@ -127,9 +131,23 @@ json_file = blend_file + ".json"
 
 #TODO: Put this in a class and make it much cleaner, add default settings incase no blender_settings.json is found.
 # load json
+
+# check if json_file exists
+if os.path.exists(json_file) == False:
+    print("No blender_settings.json found")
+    exit()
+
+print("Json File:   " + json_file)
+
 with open(json_file) as f:
+    print("Opening json file")
     json_dict = json.load(f)
+    print("Json Loaded")
+    print(json_dict)
+    print(json_dict["exportVisible"])
     blender_settings = BlenderImportSettings(json_dict)
+    
+print("Setting Loaded")
     
 # check if we're exporting collections
 if blender_settings.exportCollections:

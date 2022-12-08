@@ -35,11 +35,14 @@ namespace BlenderImporter
         }
         
         /// <summary>
-        /// 1. Export an FBX [and other assets] from a blender.exe process
-        /// 2. Apply FBX Settings to the FBX prior to importing.
-        /// 3. Continue the export process after the FBX is imported.
+        /// Called when the .blend file is imported.
         /// </summary>
-        /// <param name="ctx"></param>
+        // Happy Path:
+        //  - Find blender.exe and the python path.
+        //  - Save blender export settings to json file.
+        //  - Start blender process.
+        //  - Export FBX From Blender
+        //  - Import FBX into Unity. Apply FBX Settings prior to import.
         public override void OnImportAsset(AssetImportContext ctx)
         {
             AssetDatabase.StartAssetEditing();
@@ -50,6 +53,11 @@ namespace BlenderImporter
                 @"E:\repos\blender-importer\blender-importer-project\Assets\Editor\BlenderImporter\Python\blend-exporter.py";
             var blendFilePath = ctx.assetPath;
             var args = "";
+            
+            // create a json file of the Blender Settings.
+            var settingsJson = JsonUtility.ToJson(blendSettings);
+            var settingsPath = blendFilePath + ".json";
+            System.IO.File.WriteAllText(settingsPath, settingsJson);
             
             BlenderProcessHandler.RunBlender(blenderExe, pythonScript, blendFilePath, args);
             

@@ -80,6 +80,7 @@ def collections_to_objects(exclude, collection_names):
             parent_obj = empty_dict[collection]
             child_obj.parent = parent_obj
 
+
 @staticmethod
 def export_fbx(file_path, bs = None):
     blender280 = (2,80,0) <= bpy.app.version

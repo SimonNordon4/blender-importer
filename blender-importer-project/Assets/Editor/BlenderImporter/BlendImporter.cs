@@ -38,7 +38,6 @@ namespace BlenderImporter
         //  - Import FBX into Unity. Apply FBX Settings prior to import.
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            AssetDatabase.StartAssetEditing();
             InitialiseImporter();
             var blenderExe = BlendDefaultApplicationFinder.GetExecFileAssociatedToExtension(".blend");
             // TODO: Find the python script.
@@ -53,8 +52,6 @@ namespace BlenderImporter
             System.IO.File.WriteAllText(settingsPath, settingsJson);
             
             BlenderProcessHandler.RunBlender(blenderExe, pythonScript, blendFilePath, args,BlenderProcessFinished());
-            
-            AssetDatabase.StopAssetEditing();
         }
 
         private void InitialiseImporter()
@@ -76,6 +73,10 @@ namespace BlenderImporter
         public void FBXImported(GameObject g)
         {
            Debug.Log(g.name + " has been imported");
+           // delete the json file.
+           var settingsPath = assetPath + ".json";
+           AssetDatabase.DeleteAsset(settingsPath);
+           AssetDatabase.Refresh();
         }
     }
 }

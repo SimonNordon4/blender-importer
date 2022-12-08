@@ -10,7 +10,7 @@ namespace BlenderImporter.UI
     public class BlendImporterEditor : ScriptedImporterEditor
     {
         private int _toolbarInt = 1;
-        private string[] _toolbarStrings = { "Blender", "Model", "Materials", "Animation" };
+        private readonly string[] _toolbarStrings = { "Blender", "FBX" }; //{ "Blender", "Model", "Materials", "Animation" };
         private readonly GUILayoutOption[] _toolBarOptions = { GUILayout.MaxWidth(350), GUILayout.Height(25) };
 
         #region Blender Tab Properties
@@ -139,8 +139,9 @@ namespace BlenderImporter.UI
         {
             serializedObject.Update();
 
-            GUILayout.BeginArea(new Rect(Screen.width / 2 - 120, 5, 300, 30));
-            _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings, null, GUI.ToolbarButtonSize.FitToContents,
+            // make this Screen.width * 0.5f - 120 to work with 4 opation. Make GUI.ToolbarButtonSize.FitToContents
+            GUILayout.BeginArea(new Rect(Screen.width * 0.1f, 5, 300, 30));
+            _toolbarInt = GUILayout.Toolbar(_toolbarInt, _toolbarStrings, null, GUI.ToolbarButtonSize.Fixed,
                 _toolBarOptions);
             GUILayout.EndArea();
             GUILayout.Space(30);
@@ -152,12 +153,12 @@ namespace BlenderImporter.UI
                 case 1:
                     DrawModelTab();
                     break;
-                case 2:
-                    //DrawAnimationTab();
-                    break;
-                case 3:
-                    //DrawMaterialTab();
-                    break;
+                // case 2:
+                //     //DrawAnimationTab();
+                //     break;
+                // case 3:
+                //     //DrawMaterialTab();
+                //     break;
                 default:
                     throw new Exception("Invalid Tab Index");
             }

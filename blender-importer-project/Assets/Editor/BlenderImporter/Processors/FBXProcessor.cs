@@ -64,6 +64,7 @@ namespace BlenderImporter.Processors
                 modelImporter.secondaryUVMinLightmapResolution = ms.secondaryUVMinLightmapResolution;
                 modelImporter.secondaryUVMinObjectScale = ms.secondaryUVMinObjectScale;
             }
+            
         }
 
         private void OnPostprocessModel(GameObject g)

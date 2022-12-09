@@ -75,6 +75,7 @@ namespace BlenderImporterV1
 
         private void OnPostprocessPrefab(GameObject g)
         {
+            EditorApplication.QueuePlayerLoopUpdate();
             // this method works but the fbx doesn't finish importing until clicking
             // out of the window and then back in..
             Debug.Log($"OnPostprocessPrefab: {g.name}");

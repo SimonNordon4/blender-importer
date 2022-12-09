@@ -90,3 +90,5 @@ blender-importer-project/Assets/01-scripts/ublend/blender_export.ublend
 blender-importer-project/Assets/stylized_hammer.blend
 blender-importer-project/Assets/default_cube.blend.json
 blender-importer-project/Assets/Materials/stylized_hammer-pok.mat
+*.png
+*.meta

@@ -102,6 +102,10 @@ def export_fbx(file_path, bs = None):
             export_types.add('MESH')
         if bs.exportObjects & ExportTypes.Other:
             export_types.add('OTHER')
+
+        # replace .blend from the filepath
+        # file_path = file_path.replace('.blend', '')
+        # print("FILEPATH=" + file_path)
         
         bpy.ops.export_scene.fbx(filepath=file_path,
                                  check_existing=False,

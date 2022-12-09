@@ -75,8 +75,13 @@ namespace BlenderImporter
            Debug.Log(g.name + " has been imported");
            // delete the json file.
            var settingsPath = assetPath + ".json";
+
            AssetDatabase.DeleteAsset(settingsPath);
-           AssetDatabase.Refresh();
+
+           var fbx_path = AssetDatabase.GetAssetPath(g);
+           
+ 
+
         }
     }
 }

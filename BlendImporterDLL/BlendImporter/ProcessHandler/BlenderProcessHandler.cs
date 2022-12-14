@@ -39,7 +39,7 @@ namespace BlenderImporter.ProcessHandler
                 
                 if (outputArgs != null)
                 {
-                    Debug.Log("\tpython:" + outputArgs.Data);
+                    //Debug.Log("\tpython:" + outputArgs.Data);
                 }
             };
 
@@ -47,7 +47,7 @@ namespace BlenderImporter.ProcessHandler
             {
                 if (errorArgs != null)
                 {
-                    Debug.LogError("\tpython ERROR: " + errorArgs.Data);
+                    //Debug.LogError("\tpython ERROR: " + errorArgs.Data);
                 }
             };
             process.Start();

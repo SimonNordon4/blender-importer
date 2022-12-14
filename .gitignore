@@ -92,3 +92,4 @@ blender-importer-project/Assets/default_cube.blend.json
 blender-importer-project/Assets/Materials/stylized_hammer-pok.mat
 *.png
 *.meta
+BlendImporterDLL/*

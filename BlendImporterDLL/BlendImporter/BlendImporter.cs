@@ -41,8 +41,7 @@ namespace BlenderImporter
             InitialiseImporter();
             var blenderExe = BlendDefaultApplicationFinder.GetExecFileAssociatedToExtension(".blend");
             // TODO: Find the python script.
-            var pythonScript =
-                @"E:\repos\blender-importer\blender-importer-project\Assets\Editor\BlenderImporter\Python\blend-exporter.py";
+            var pythonScript = FindPythonPath();
             var blendFilePath = ctx.assetPath;
             var args = "";
             
@@ -68,20 +67,32 @@ namespace BlenderImporter
 
         private void BlendProcessFinished()
         {
-            Debug.Log("Blend Process has Finished!");
+           // Debug.Log("Blend Process has Finished!");
+           // delete the json file.
+            var settingsPath = assetPath + ".json";
+            AssetDatabase.DeleteAsset(settingsPath);
         }
         public void FBXImported(GameObject g)
         {
-           Debug.Log(g.name + " has been imported");
-           // delete the json file.
-           var settingsPath = assetPath + ".json";
+           //Debug.Log(g.name + " has been imported");
+        }
 
-           AssetDatabase.DeleteAsset(settingsPath);
-
-           var fbx_path = AssetDatabase.GetAssetPath(g);
-           
- 
-
+        private static string FindPythonPath()
+        {
+            var pythonFileName = @"blend-exporter";
+            var pyGUIDs =AssetDatabase.FindAssets(pythonFileName);
+            
+            foreach (var guid in pyGUIDs)
+            {
+                var pyPath = AssetDatabase.GUIDToAssetPath(guid);
+                // check if the asset name is equal to "blend-exporter.py"
+                if (pyPath.EndsWith(pythonFileName + ".py"))
+                {
+                    return pyPath;
+                }
+            }
+            
+            throw new System.Exception("Could not find the python script");
         }
     }
 }

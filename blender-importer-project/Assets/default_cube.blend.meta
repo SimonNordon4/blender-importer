@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 19e57cfd59123ad4c8b0a08be879d951
-importerOverride: BlendImporter:BlenderImporter:BlendImporter
+importerOverride: Assembly-CSharp-Editor:BlenderImporter:BlendImporter
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
